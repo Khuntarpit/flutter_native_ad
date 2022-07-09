@@ -1,7 +1,8 @@
 name: flutter_native_ad
-description: A new Flutter project.
+description: Flutter Native Ads Plugin is Allow Show All Types of Ads in One Package.
 version: 0.0.1
-homepage:
+homepage: https://github.com/Khuntarpit/flutter_native_ad
+repository: https://github.com/Khuntarpit/flutter_native_ad
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
