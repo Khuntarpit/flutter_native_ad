@@ -19,12 +19,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    intializeAd();
+    FlutterNativeAd.init();
     super.initState();
-  }
-
-  intializeAd() async{
-    await FlutterNativeAd.init();
   }
 
   @override
