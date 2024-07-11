@@ -12,7 +12,6 @@ class FlutterAdOpenAd{
   }) {
     AppOpenAd.load(
       adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/3419835294",
-      orientation: AppOpenAd.orientationPortrait,
       request: AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: onAdLoaded,

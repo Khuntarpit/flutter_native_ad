@@ -13,13 +13,13 @@ class FlutterNativeAd {
   late NativeAd nativeAd;
   late NativeAd mediumNativeAd;
 
-  FlutterNativeAd.init(){
-    testDevice();
+  FlutterNativeAd.init({testDeviceIds}){
+    testDevice(testDeviceIds: testDeviceIds);
     invokeNativeAd();
   }
 
-  testDevice() async{
-    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(testDeviceIds: ["BC754A812958EE7FF20599662417762B"]));
+  testDevice({testDeviceIds}) async{
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(testDeviceIds: testDeviceIds ?? ["BC754A812958EE7FF20599662417762B"]));
   }
 
   invokeNativeAd({String? nativeVideoID}) async{
