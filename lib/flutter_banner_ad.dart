@@ -15,7 +15,7 @@ class FlutterBannerAd{
   }) {
     bannerAd = BannerAd(
       adUnitId: adUnitId ?? 'ca-app-pub-3940256099942544/6300978111',
-      request: AdRequest(),
+      request: const AdRequest(),
       size: AdSize.banner, // bannerAd size as per need
       listener: BannerAdListener(
         onAdLoaded: onAdLoaded,

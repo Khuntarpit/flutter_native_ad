@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_rewarded_ad.dart';
 
-class RewardedAdPage extends StatefulWidget {
-  const RewardedAdPage({Key? key}) : super(key: key);
+class RewardedAdScreen extends StatefulWidget {
+  const RewardedAdScreen({Key? key}) : super(key: key);
 
   @override
-  State<RewardedAdPage> createState() => _RewardedAdPageState();
+  State<RewardedAdScreen> createState() => _RewardedAdScreenState();
 }
 
-class _RewardedAdPageState extends State<RewardedAdPage> {
+class _RewardedAdScreenState extends State<RewardedAdScreen> {
 
   final _rewardedAd = FlutterRewardedAd();
   bool isRewardedAdReady = false;
@@ -20,15 +20,17 @@ class _RewardedAdPageState extends State<RewardedAdPage> {
   }
 
   loadAds() async{
-    await _rewardedAd.loadRewardedAd(onAdLoaded: ( ad) {
-      _rewardedAd.rewardedAd = ad;
-      isRewardedAdReady = true;
+    await _rewardedAd.loadRewardedAd(
+      onAdLoaded: ( ad) {
+        _rewardedAd.rewardedAd = ad;
+        isRewardedAdReady = true;
       },
-        onAdFailedToLoad: (error) {
-          print('Failed to load a rewarded ad: ${error.message}');
-          isRewardedAdReady = false;
-          loadAds();
-        },);
+      onAdFailedToLoad: (error) {
+        print('Failed to load a rewarded ad: ${error.message}');
+        isRewardedAdReady = false;
+        loadAds();
+      },
+    );
   }
   @override
   Widget build(BuildContext context) {

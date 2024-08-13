@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_native_ad/flutter_native_ad.dart';
 import 'package:flutter_native_ad/flutter_native_ad_platform_interface.dart';
 import 'package:flutter_native_ad/flutter_native_ad_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';

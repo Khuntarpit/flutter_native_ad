@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
-import 'package:flutter_native_ad_example/Screen/Home_Screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: HomePage()
+        home: HomeScreen()
     );
   }
 }

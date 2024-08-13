@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
-class BannerAdPage extends StatefulWidget {
-  const BannerAdPage({Key? key}) : super(key: key);
+class BannerAdScreen extends StatefulWidget {
+  const BannerAdScreen({Key? key}) : super(key: key);
 
   @override
-  State<BannerAdPage> createState() => _BannerAdPageState();
+  State<BannerAdScreen> createState() => _BannerAdScreenState();
 }
 
-class _BannerAdPageState extends State<BannerAdPage> {
+class _BannerAdScreenState extends State<BannerAdScreen> {
 
   final _adBanner = FlutterBannerAd();
   var isBannerAdReady = false;
@@ -19,15 +19,17 @@ class _BannerAdPageState extends State<BannerAdPage> {
   }
 
   loadAd() async{
-   await _adBanner.loadBannerAd(onAdLoaded: (_) {
-      isBannerAdReady = true;
-      setState(()=>"");
-    },
-        onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          isBannerAdReady = false;
-          ad.dispose();
-        });
+    await _adBanner.loadBannerAd(
+      onAdLoaded: (_) {
+        isBannerAdReady = true;
+        setState(()=>"");
+      },
+      onAdFailedToLoad: (ad, err) {
+        print('Failed to load a banner ad: ${err.message}');
+        isBannerAdReady = false;
+        ad.dispose();
+      },
+    );
   }
 
   @override

@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
-class NativeVideoAdPage extends StatefulWidget {
-  const NativeVideoAdPage({Key? key}) : super(key: key);
+class NativeVideoAdScreen extends StatefulWidget {
+  const NativeVideoAdScreen({Key? key}) : super(key: key);
 
   @override
-  State<NativeVideoAdPage> createState() => _NativeVideoAdPageState();
+  State<NativeVideoAdScreen> createState() => _NativeVideoAdScreenState();
 }
 
-class _NativeVideoAdPageState extends State<NativeVideoAdPage> {
+class _NativeVideoAdScreenState extends State<NativeVideoAdScreen> {
   final _ad = FlutterNativeAd();
   @override
   void initState() {

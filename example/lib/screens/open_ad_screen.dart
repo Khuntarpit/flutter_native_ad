@@ -1,18 +1,15 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
-class AdOpenAdPage extends StatefulWidget {
-  const AdOpenAdPage({Key? key}) : super(key: key);
+class AdOpenAdScreen extends StatefulWidget {
+  const AdOpenAdScreen({Key? key}) : super(key: key);
 
   @override
-  State<AdOpenAdPage> createState() => _AdOpenAdPageState();
+  State<AdOpenAdScreen> createState() => _AdOpenAdScreenState();
 }
 
-class _AdOpenAdPageState extends State<AdOpenAdPage> {
+class _AdOpenAdScreenState extends State<AdOpenAdScreen> {
   bool isAppOpenAdAdReady = false;
-
   final _adOpenAd = FlutterAdOpenAd();
 
   @override
@@ -23,15 +20,18 @@ class _AdOpenAdPageState extends State<AdOpenAdPage> {
   }
   loadAd() async{
 
-    await _adOpenAd.loadAppOpenAd(onAdLoaded:(ad) {
-      print('$ad loaded');
-      _adOpenAd.appOpenAd = ad;
-      isAppOpenAdAdReady = true;
-    }, onAdFailedToLoad:   (error) {
-      isAppOpenAdAdReady = false;
-      print('AppOpenAd failed to load: $error');
-      loadAd();
-    });
+    await _adOpenAd.loadAppOpenAd(
+      onAdLoaded:(ad) {
+        print('$ad loaded');
+        _adOpenAd.appOpenAd = ad;
+        isAppOpenAdAdReady = true;
+      },
+      onAdFailedToLoad:   (error) {
+        isAppOpenAdAdReady = false;
+        print('AppOpenAd failed to load: $error');
+        loadAd();
+      },
+    );
   }
 
   @override

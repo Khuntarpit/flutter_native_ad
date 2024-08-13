@@ -13,7 +13,7 @@ class FlutterInterstitialAd{
   }) {
     InterstitialAd.load(
       adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/1033173712",
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: onAdLoaded,
         onAdFailedToLoad: onAdFailedToLoad,
@@ -28,7 +28,7 @@ class FlutterInterstitialAd{
 }) {
     RewardedInterstitialAd.load(
         adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/5354046379",
-        request: AdRequest(),
+        request: const AdRequest(),
         rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
           onAdLoaded: onAdLoaded,
           onAdFailedToLoad: onAdFailedToLoad,

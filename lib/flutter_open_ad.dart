@@ -12,7 +12,7 @@ class FlutterAdOpenAd{
   }) {
     AppOpenAd.load(
       adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/3419835294",
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: onAdLoaded,
         onAdFailedToLoad : onAdFailedToLoad

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_interstitial_ad.dart';
 
-class InterstitialAdPage extends StatefulWidget {
-  const InterstitialAdPage({Key? key}) : super(key: key);
+class InterstitialAdScreen extends StatefulWidget {
+  const InterstitialAdScreen({Key? key}) : super(key: key);
 
   @override
-  State<InterstitialAdPage> createState() => _InterstitialAdPageState();
+  State<InterstitialAdScreen> createState() => _InterstitialAdScreenState();
 }
 
-class _InterstitialAdPageState extends State<InterstitialAdPage> {
+class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
 
   bool isInterstitialAdReady = false;
   bool isRewardedInterstitialAdReady = false;
@@ -20,21 +20,23 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
   }
 
   loadAds() async{
-    await _loadInterStitialAd();
+    await _loadInterstitialAd();
     await _loadRewardedInterstitialAd();
 
   }
 
-  _loadInterStitialAd() async{
-    await _interstitialAd.loadInterstitialAd(onAdLoaded: (ad) {
-      _interstitialAd.interstitialAd = ad;
-      isInterstitialAdReady = true;
-    },
-        onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
-          isInterstitialAdReady = false;
-          _loadInterStitialAd();
-        });
+  _loadInterstitialAd() async{
+    await _interstitialAd.loadInterstitialAd(
+      onAdLoaded: (ad) {
+        _interstitialAd.interstitialAd = ad;
+        isInterstitialAdReady = true;
+      },
+      onAdFailedToLoad: (err) {
+        print('Failed to load an interstitial ad: ${err.message}');
+        isInterstitialAdReady = false;
+        _loadInterstitialAd();
+      },
+    );
   }
 
   _loadRewardedInterstitialAd() async{
@@ -47,7 +49,8 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
         isRewardedInterstitialAdReady = false;
         print('RewardedInterstitialAd failed to load: $error');
         _loadRewardedInterstitialAd();
-      },);
+      },
+    );
   }
 
   @override
@@ -60,7 +63,7 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
             ElevatedButton(
                 onPressed: () async{
                   isInterstitialAdReady ? await _interstitialAd.interstitialAd?.show() : null;
-                  _loadInterStitialAd();
+                  _loadInterstitialAd();
                 },
                 child: const Text("InterstitialAd")),
 
