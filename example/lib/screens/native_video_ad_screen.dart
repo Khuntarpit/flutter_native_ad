@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
@@ -16,7 +15,6 @@ class _NativeVideoAdScreenState extends State<NativeVideoAdScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +22,10 @@ class _NativeVideoAdScreenState extends State<NativeVideoAdScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(height: 255,child:  _ad.addVideoNativeAD(context))
+            Container(height: 255, child: _ad.addVideoNativeAD(context))
           ],
         ),
       ),
     );
   }
 }
-
-
-

@@ -17,14 +17,13 @@ class _NativeMediumAdScreenState extends State<NativeMediumAdScreen> {
     loadAd();
   }
 
-
-  loadAd() async{
+  loadAd() async {
     await _ad.loadmediumNativeAd(
       onAdLoaded: (ad) {
         isMediumNativeAdReady = true;
-        setState(()=>"");
+        setState(() => "");
       },
-      onAdFailedToLoad:(ad, error) {
+      onAdFailedToLoad: (ad, error) {
         _ad.loadmediumNativeAd();
         isMediumNativeAdReady = false;
         ad.dispose();
@@ -40,11 +39,14 @@ class _NativeMediumAdScreenState extends State<NativeMediumAdScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(height: 255,child: isMediumNativeAdReady ?_ad.getMediumNativeAD() : SizedBox.shrink())
+            Container(
+                height: 255,
+                child: isMediumNativeAdReady
+                    ? _ad.getMediumNativeAD()
+                    : SizedBox.shrink())
           ],
         ),
       ),
     );
   }
 }
-

@@ -28,49 +28,58 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Center(
             child: Column(
               children: [
-
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => NativeBannerAdScreen(),));
-
-                }, child: const Text("NativeBannerAd")),
-
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NativeBannerAdScreen(),
+                      ));
+                    },
+                    child: const Text("NativeBannerAd")),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => NativeMediumAdScreen(),));
-
-                }, child: const Text("NativeMediumAd")),
-
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NativeMediumAdScreen(),
+                      ));
+                    },
+                    child: const Text("NativeMediumAd")),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => NativeVideoAdScreen(),));
-
-                }, child: const Text("VideoNativeAd")),
-
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NativeVideoAdScreen(),
+                      ));
+                    },
+                    child: const Text("VideoNativeAd")),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => BannerAdScreen()));
-
-                }, child: const Text("BannerAd")),
-
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => BannerAdScreen()));
+                    },
+                    child: const Text("BannerAd")),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => InterstitialAdScreen()));
-
-                }, child: const Text("InterstitialAD")),
-
-                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RewardedAdScreen()));
-
-                }, child: const Text("RewardedAd")),
-
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => InterstitialAdScreen()));
+                    },
+                    child: const Text("InterstitialAD")),
                 const SizedBox(height: 20),
-                ElevatedButton(onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdOpenAdScreen()));
-
-                }, child: const Text("AdOpenAd")),
-                
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RewardedAdScreen()));
+                    },
+                    child: const Text("RewardedAd")),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AdOpenAdScreen()));
+                    },
+                    child: const Text("AdOpenAd")),
               ],
             ),
           ),

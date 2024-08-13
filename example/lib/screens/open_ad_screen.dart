@@ -13,20 +13,19 @@ class _AdOpenAdScreenState extends State<AdOpenAdScreen> {
   final _adOpenAd = FlutterAdOpenAd();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     loadAd();
-
   }
-  loadAd() async{
 
+  loadAd() async {
     await _adOpenAd.loadAppOpenAd(
-      onAdLoaded:(ad) {
+      onAdLoaded: (ad) {
         print('$ad loaded');
         _adOpenAd.appOpenAd = ad;
         isAppOpenAdAdReady = true;
       },
-      onAdFailedToLoad:   (error) {
+      onAdFailedToLoad: (error) {
         isAppOpenAdAdReady = false;
         print('AppOpenAd failed to load: $error');
         loadAd();
@@ -39,20 +38,23 @@ class _AdOpenAdScreenState extends State<AdOpenAdScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("AdOpenAd")),
       body: Center(
-        child: ElevatedButton(onPressed: () async{
-          isAppOpenAdAdReady ? await _adOpenAd.appOpenAd?.show() : null;
-          loadAd();
-          _adOpenAd.appOpenAdCallback(onAdFailedToShowFullScreenContent: (ad, error) {
-            print('$ad onAdFailedToShowFullScreenContent: $error');
-            ad.dispose();
-            loadAd();
-          },onAdDismissedFullScreenContent: (ad) {
-              print('$ad onAdDismissedFullScreenContent');
-              ad.dispose();
+        child: ElevatedButton(
+            onPressed: () async {
+              isAppOpenAdAdReady ? await _adOpenAd.appOpenAd?.show() : null;
               loadAd();
+              _adOpenAd.appOpenAdCallback(
+                onAdFailedToShowFullScreenContent: (ad, error) {
+                  print('$ad onAdFailedToShowFullScreenContent: $error');
+                  ad.dispose();
+                  loadAd();
+                },
+                onAdDismissedFullScreenContent: (ad) {
+                  print('$ad onAdDismissedFullScreenContent');
+                  ad.dispose();
+                  loadAd();
+                },
+              );
             },
-          );
-        },
             child: const Text("AdOpenAd")),
       ),
     );

@@ -17,15 +17,14 @@ class _NativeBannerAdScreenState extends State<NativeBannerAdScreen> {
     loadAd();
   }
 
-
-  loadAd() async{
+  loadAd() async {
     await _ad.loadNativeBannerAd(
       adUnitId: "Your Native Banner Ad ID",
       onAdLoaded: (ad) {
         isNativeAdReady = true;
-        setState(()=>"");
+        setState(() => "");
       },
-      onAdFailedToLoad:(ad, error) {
+      onAdFailedToLoad: (ad, error) {
         _ad.loadNativeBannerAd();
         isNativeAdReady = false;
         ad.dispose();
@@ -41,8 +40,11 @@ class _NativeBannerAdScreenState extends State<NativeBannerAdScreen> {
       body: Center(
         child: Column(
           children: [
-
-            Container(height: 102,child: isNativeAdReady?_ad.getnativeBannerAD() :SizedBox.shrink())
+            Container(
+                height: 102,
+                child: isNativeAdReady
+                    ? _ad.getnativeBannerAD()
+                    : SizedBox.shrink())
           ],
         ),
       ),

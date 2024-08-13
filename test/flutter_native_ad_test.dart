@@ -3,10 +3,9 @@ import 'package:flutter_native_ad/flutter_native_ad_platform_interface.dart';
 import 'package:flutter_native_ad/flutter_native_ad_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockFlutterNativeAdPlatform 
+class MockFlutterNativeAdPlatform
     with MockPlatformInterfaceMixin
     implements FlutterNativeAdPlatform {
-
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 
@@ -18,7 +17,8 @@ class MockFlutterNativeAdPlatform
 }
 
 void main() {
-  final FlutterNativeAdPlatform initialPlatform = FlutterNativeAdPlatform.instance;
+  final FlutterNativeAdPlatform initialPlatform =
+      FlutterNativeAdPlatform.instance;
 
   test('$MethodChannelFlutterNativeAd is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelFlutterNativeAd>());

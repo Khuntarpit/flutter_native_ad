@@ -1,9 +1,7 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class FlutterBannerAd{
-
+class FlutterBannerAd {
   //----------------------- BannerAd ----------------------//
 
   late BannerAd bannerAd;
@@ -25,8 +23,7 @@ class FlutterBannerAd{
     bannerAd.load();
   }
 
-  Widget getBannerAd(){
+  Widget getBannerAd() {
     return AdWidget(ad: bannerAd);
   }
 }
-

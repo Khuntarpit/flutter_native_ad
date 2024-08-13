@@ -14,7 +14,7 @@ abstract class FlutterNativeAdPlatform extends PlatformInterface {
   ///
   /// Defaults to [MethodChannelFlutterNativeAd].
   static FlutterNativeAdPlatform get instance => _instance;
-  
+
   /// Platform-specific implementations should set this with their own
   /// platform-specific class that extends [FlutterNativeAdPlatform] when
   /// they register themselves.

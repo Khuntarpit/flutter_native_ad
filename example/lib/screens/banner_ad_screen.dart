@@ -9,7 +9,6 @@ class BannerAdScreen extends StatefulWidget {
 }
 
 class _BannerAdScreenState extends State<BannerAdScreen> {
-
   final _adBanner = FlutterBannerAd();
   var isBannerAdReady = false;
   @override
@@ -18,11 +17,11 @@ class _BannerAdScreenState extends State<BannerAdScreen> {
     loadAd();
   }
 
-  loadAd() async{
+  loadAd() async {
     await _adBanner.loadBannerAd(
       onAdLoaded: (_) {
         isBannerAdReady = true;
-        setState(()=>"");
+        setState(() => "");
       },
       onAdFailedToLoad: (ad, err) {
         print('Failed to load a banner ad: ${err.message}');
@@ -39,7 +38,11 @@ class _BannerAdScreenState extends State<BannerAdScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(height: 50,child: isBannerAdReady ?_adBanner.getBannerAd() : SizedBox.shrink())
+            Container(
+                height: 50,
+                child: isBannerAdReady
+                    ? _adBanner.getBannerAd()
+                    : SizedBox.shrink())
           ],
         ),
       ),

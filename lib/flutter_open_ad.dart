@@ -1,9 +1,7 @@
-
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class FlutterAdOpenAd{
+class FlutterAdOpenAd {
   AppOpenAd? appOpenAd;
-
 
   loadAppOpenAd({
     String? adUnitId,
@@ -14,20 +12,16 @@ class FlutterAdOpenAd{
       adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/3419835294",
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
-        onAdLoaded: onAdLoaded,
-        onAdFailedToLoad : onAdFailedToLoad
-      ),
+          onAdLoaded: onAdLoaded, onAdFailedToLoad: onAdFailedToLoad),
     );
   }
 
-  appOpenAdCallback( {
-    Function(Ad ad, AdError error)? onAdFailedToShowFullScreenContent,
-    GenericAdEventCallback<Ad>? onAdDismissedFullScreenContent}){
+  appOpenAdCallback(
+      {Function(Ad ad, AdError error)? onAdFailedToShowFullScreenContent,
+      GenericAdEventCallback<Ad>? onAdDismissedFullScreenContent}) {
     appOpenAd?.fullScreenContentCallback = FullScreenContentCallback(
       onAdFailedToShowFullScreenContent: onAdFailedToShowFullScreenContent,
       onAdDismissedFullScreenContent: onAdDismissedFullScreenContent,
     );
-
   }
-
 }

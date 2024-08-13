@@ -9,7 +9,6 @@ class InterstitialAdScreen extends StatefulWidget {
 }
 
 class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
-
   bool isInterstitialAdReady = false;
   bool isRewardedInterstitialAdReady = false;
   final _interstitialAd = FlutterInterstitialAd();
@@ -19,13 +18,12 @@ class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
     loadAds();
   }
 
-  loadAds() async{
+  loadAds() async {
     await _loadInterstitialAd();
     await _loadRewardedInterstitialAd();
-
   }
 
-  _loadInterstitialAd() async{
+  _loadInterstitialAd() async {
     await _interstitialAd.loadInterstitialAd(
       onAdLoaded: (ad) {
         _interstitialAd.interstitialAd = ad;
@@ -39,7 +37,7 @@ class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
     );
   }
 
-  _loadRewardedInterstitialAd() async{
+  _loadRewardedInterstitialAd() async {
     await _interstitialAd.loadRewardedInterstitialAd(
       onAdLoaded: (ad) {
         _interstitialAd.rewardedInterstitial = ad;
@@ -61,38 +59,38 @@ class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
         child: Column(
           children: [
             ElevatedButton(
-                onPressed: () async{
-                  isInterstitialAdReady ? await _interstitialAd.interstitialAd?.show() : null;
+                onPressed: () async {
+                  isInterstitialAdReady
+                      ? await _interstitialAd.interstitialAd?.show()
+                      : null;
                   _loadInterstitialAd();
                 },
                 child: const Text("InterstitialAd")),
-
-
             SizedBox(height: 10),
-            ElevatedButton(onPressed: () async{
-              isRewardedInterstitialAdReady
-                  ? await _interstitialAd.rewardedInterstitial?.show(
-                  onUserEarnedReward: (ad,reward) {
+            ElevatedButton(
+                onPressed: () async {
+                  isRewardedInterstitialAdReady
+                      ? await _interstitialAd.rewardedInterstitial?.show(
+                          onUserEarnedReward: (ad, reward) {
+                          _loadRewardedInterstitialAd();
+                        })
+                      : null;
+
+                  _interstitialAd.rewardedInterstitialCallback(
+                      onAdDismissedFullScreenContent: (ad) {
+                    print('$ad onAdDismissedFullScreenContent.');
+                    ad.dispose();
                     _loadRewardedInterstitialAd();
-
-                  })
-                  : null;
-
-              _interstitialAd.rewardedInterstitialCallback(onAdDismissedFullScreenContent: (ad) {
-                print('$ad onAdDismissedFullScreenContent.');
-                ad.dispose();
-                _loadRewardedInterstitialAd();
-              },onAdFailedToShowFullScreenContent: (ad,error) {
-                print('$ad onAdFailedToShowFullScreenContent: $error');
-                ad.dispose();
-                _loadRewardedInterstitialAd();
-              });
-            },
+                  }, onAdFailedToShowFullScreenContent: (ad, error) {
+                    print('$ad onAdFailedToShowFullScreenContent: $error');
+                    ad.dispose();
+                    _loadRewardedInterstitialAd();
+                  });
+                },
                 child: const Text("RewardedInterstitialAd")),
           ],
         ),
       ),
     );
-
   }
 }
