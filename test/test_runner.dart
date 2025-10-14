@@ -1,9 +1,10 @@
+import 'dart:developer';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Flutter Native Ad Plugin Tests', () {
     test('Test Suite Summary', () {
-      print('''
+      log('''
 🧪 Flutter Native Ad Plugin Test Suite
 =====================================
 
