@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_ad/flutter_native_ad.dart';
 import 'interstitial_ad_screen.dart';
 import 'native_banner_ad_screen.dart';
 import 'native_medium_ad_screen.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeAdLogger.screen('initState called');
   }
 
   @override

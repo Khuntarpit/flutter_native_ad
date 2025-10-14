@@ -18,15 +18,20 @@ class _BannerAdScreenState extends State<BannerAdScreen> {
   }
 
   loadAd() async {
+    print('🎯 [BANNER SCREEN] Attempting to load banner ad...');
     await _adBanner.loadBannerAd(
+      // adUnitId: "Your Banner Ad ID", // Optional: override with custom ID
       onAdLoaded: (_) {
         isBannerAdReady = true;
-        setState(() => "");
+        setState(() {});
+        print('🎉 [BANNER SCREEN] Banner ad loaded successfully and UI updated');
       },
       onAdFailedToLoad: (ad, err) {
-        print('Failed to load a banner ad: ${err.message}');
+        print('💥 [BANNER SCREEN] Failed to load banner ad: ${err.message}');
+        print('🔍 [BANNER SCREEN] Error code: ${err.code}, domain: ${err.domain}');
         isBannerAdReady = false;
         ad.dispose();
+        // The throttling system will handle retries automatically
       },
     );
   }

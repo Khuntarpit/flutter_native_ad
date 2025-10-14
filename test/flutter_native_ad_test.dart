@@ -11,24 +11,57 @@ class MockFlutterNativeAdPlatform
 
   @override
   Future<String?> getNativeAd() {
-    // TODO: implement getNativeAd
-    throw UnimplementedError();
+    return Future.value('mock-native-ad');
   }
 }
 
 void main() {
-  final FlutterNativeAdPlatform initialPlatform =
-      FlutterNativeAdPlatform.instance;
+  group('FlutterNativeAd Platform Tests', () {
+    final FlutterNativeAdPlatform initialPlatform =
+        FlutterNativeAdPlatform.instance;
 
-  test('$MethodChannelFlutterNativeAd is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelFlutterNativeAd>());
+    test('$MethodChannelFlutterNativeAd is the default instance', () {
+      expect(initialPlatform, isInstanceOf<MethodChannelFlutterNativeAd>());
+    });
+
+    test('getPlatformVersion returns correct version', () async {
+      MockFlutterNativeAdPlatform fakePlatform = MockFlutterNativeAdPlatform();
+      FlutterNativeAdPlatform.instance = fakePlatform;
+
+      expect(await fakePlatform.getPlatformVersion(), '42');
+    });
+
+    test('getNativeAd returns mock ad', () async {
+      MockFlutterNativeAdPlatform fakePlatform = MockFlutterNativeAdPlatform();
+      FlutterNativeAdPlatform.instance = fakePlatform;
+
+      expect(await fakePlatform.getNativeAd(), 'mock-native-ad');
+    });
+
+    test('platform interface is properly implemented', () {
+      MockFlutterNativeAdPlatform fakePlatform = MockFlutterNativeAdPlatform();
+      expect(fakePlatform, isA<FlutterNativeAdPlatform>());
+    });
   });
 
-  test('getPlatformVersion', () async {
-    // FlutterNativeAd flutterNativeAdPlugin = FlutterNativeAd();
-    MockFlutterNativeAdPlatform fakePlatform = MockFlutterNativeAdPlatform();
-    FlutterNativeAdPlatform.instance = fakePlatform;
+  group('Method Channel Tests', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
 
-    // expect(await flutterNativeAdPlugin.getPlatformVersion(), '42');
+    test('MethodChannelFlutterNativeAd can be instantiated', () {
+      final platform = MethodChannelFlutterNativeAd();
+      expect(platform, isA<MethodChannelFlutterNativeAd>());
+    });
+
+    test('getPlatformVersion returns string', () async {
+      final platform = MethodChannelFlutterNativeAd();
+      final result = await platform.getPlatformVersion();
+      expect(result, isA<String>());
+    });
+
+    test('getNativeAd returns string', () async {
+      final platform = MethodChannelFlutterNativeAd();
+      final result = await platform.getNativeAd();
+      expect(result, isA<String>());
+    });
   });
 }

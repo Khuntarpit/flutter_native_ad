@@ -1,4 +1,7 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'flutter_native_ad_config.dart';
+import 'flutter_native_ad_throttler.dart';
+import 'flutter_native_ad_logger.dart';
 
 class FlutterInterstitialAd {
   InterstitialAd? interstitialAd;
@@ -9,12 +12,45 @@ class FlutterInterstitialAd {
     required GenericAdEventCallback<InterstitialAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
   }) {
+    final adUnitIdToUse = adUnitId ?? FlutterNativeAdConfig.instance.getInterstitialAdUnitId();
+    FlutterNativeAdLogger.interstitial('Starting interstitial ad load with ID: $adUnitIdToUse');
+    
+    // Check if we can make a request (throttling)
+    if (!AdRequestThrottler.canMakeRequest(adUnitIdToUse)) {
+      final delay = AdRequestThrottler.getTimeUntilNextRequest(adUnitIdToUse);
+      FlutterNativeAdLogger.throttling('Request throttled. Retrying in $delay seconds.');
+      
+      // Schedule retry
+      Future.delayed(Duration(seconds: delay), () {
+        FlutterNativeAdLogger.interstitial('Retrying interstitial ad load after throttling delay');
+        loadInterstitialAd(
+          adUnitId: adUnitId,
+          onAdLoaded: onAdLoaded,
+          onAdFailedToLoad: onAdFailedToLoad,
+        );
+      });
+      return;
+    }
+
+    // Record the request attempt
+    AdRequestThrottler.recordRequest(adUnitIdToUse);
+    FlutterNativeAdLogger.debug('Request recorded, calling InterstitialAd.load()...');
+
     InterstitialAd.load(
-      adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/1033173712",
+      adUnitId: adUnitIdToUse,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: onAdLoaded,
-        onAdFailedToLoad: onAdFailedToLoad,
+        onAdLoaded: (ad) {
+          AdRequestThrottler.recordSuccess(adUnitIdToUse);
+          FlutterNativeAdLogger.success('Successfully loaded!');
+          onAdLoaded(ad);
+        },
+        onAdFailedToLoad: (error) {
+          AdRequestThrottler.recordFailure(adUnitIdToUse);
+          FlutterNativeAdLogger.error('Failed to load - Code: ${error.code}, Message: ${error.message}');
+          FlutterNativeAdLogger.debug('Error domain: ${error.domain}');
+          onAdFailedToLoad(error);
+        },
       ),
     );
   }
@@ -24,12 +60,45 @@ class FlutterInterstitialAd {
     required GenericAdEventCallback<RewardedInterstitialAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
   }) {
-    RewardedInterstitialAd.load(
-        adUnitId: adUnitId ?? "ca-app-pub-3940256099942544/5354046379",
-        request: const AdRequest(),
-        rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
+    final adUnitIdToUse = adUnitId ?? FlutterNativeAdConfig.instance.getRewardedInterstitialAdUnitId();
+    FlutterNativeAdLogger.interstitial('Starting rewarded interstitial ad load with ID: $adUnitIdToUse');
+    
+    // Check if we can make a request (throttling)
+    if (!AdRequestThrottler.canMakeRequest(adUnitIdToUse)) {
+      final delay = AdRequestThrottler.getTimeUntilNextRequest(adUnitIdToUse);
+      FlutterNativeAdLogger.throttling('Request throttled. Retrying in $delay seconds.');
+      
+      // Schedule retry
+      Future.delayed(Duration(seconds: delay), () {
+        FlutterNativeAdLogger.interstitial('Retrying rewarded interstitial ad load after throttling delay');
+        loadRewardedInterstitialAd(
+          adUnitId: adUnitId,
           onAdLoaded: onAdLoaded,
           onAdFailedToLoad: onAdFailedToLoad,
+        );
+      });
+      return;
+    }
+
+    // Record the request attempt
+    AdRequestThrottler.recordRequest(adUnitIdToUse);
+    FlutterNativeAdLogger.debug('Request recorded, calling RewardedInterstitialAd.load()...');
+
+    RewardedInterstitialAd.load(
+        adUnitId: adUnitIdToUse,
+        request: const AdRequest(),
+        rewardedInterstitialAdLoadCallback: RewardedInterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            AdRequestThrottler.recordSuccess(adUnitIdToUse);
+            FlutterNativeAdLogger.success('Successfully loaded!');
+            onAdLoaded(ad);
+          },
+          onAdFailedToLoad: (error) {
+            AdRequestThrottler.recordFailure(adUnitIdToUse);
+            FlutterNativeAdLogger.error('Failed to load - Code: ${error.code}, Message: ${error.message}');
+            FlutterNativeAdLogger.debug('Error domain: ${error.domain}');
+            onAdFailedToLoad(error);
+          },
         ));
   }
 

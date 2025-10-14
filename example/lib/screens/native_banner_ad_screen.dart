@@ -14,21 +14,25 @@ class _NativeBannerAdScreenState extends State<NativeBannerAdScreen> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeAdLogger.screen('initState called');
     loadAd();
   }
 
   loadAd() async {
+    FlutterNativeAdLogger.screen('Attempting to load native banner ad...');
     await _ad.loadNativeBannerAd(
-      adUnitId: "Your Native Banner Ad ID",
+      // adUnitId: "Your Native Banner Ad ID", // Optional: override with custom ID
       onAdLoaded: (ad) {
         isNativeAdReady = true;
-        setState(() => "");
+        setState(() {});
+        FlutterNativeAdLogger.success('Native banner ad loaded successfully and UI updated');
       },
       onAdFailedToLoad: (ad, error) {
-        _ad.loadNativeBannerAd();
         isNativeAdReady = false;
         ad.dispose();
-        print('Ad load failed (code=${error.code} message=${error.message})');
+        FlutterNativeAdLogger.error('Ad load failed (code=${error.code} message=${error.message})');
+        FlutterNativeAdLogger.debug('Error domain: ${error.domain}');
+        // The throttling system will handle retries automatically
       },
     );
   }
