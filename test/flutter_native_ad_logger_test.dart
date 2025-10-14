@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_native_ad/flutter_native_ad_logger.dart';
 
 void main() {

@@ -10,12 +10,12 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     setUp(() {
-      channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'getPlatformVersion':
             return '42';
           case 'getNativeAds':
-            return {'status': 'success', 'message': 'Native ads loaded'};
+            return 'Native ads loaded successfully';
           default:
             throw PlatformException(
               code: 'UNIMPLEMENTED',
@@ -26,7 +26,7 @@ void main() {
     });
 
     tearDown(() {
-      channel.setMockMethodCallHandler(null);
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel,null);
     });
 
     test('getPlatformVersion returns correct version', () async {
@@ -39,7 +39,7 @@ void main() {
     });
 
     test('handles platform exceptions gracefully', () async {
-      channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         throw PlatformException(
           code: 'TEST_ERROR',
           message: 'Test error message',
@@ -51,7 +51,7 @@ void main() {
     });
 
     test('handles null responses', () async {
-      channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         return null;
       });
 
@@ -59,11 +59,11 @@ void main() {
     });
 
     test('handles different method calls', () async {
-      channel.setMockMethodCallHandler((MethodCall methodCall) async {
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         if (methodCall.method == 'getPlatformVersion') {
           return 'Android 13';
         } else if (methodCall.method == 'getNativeAds') {
-          return {'ads': ['ad1', 'ad2']};
+          return 'Multiple ads loaded';
         }
         return null;
       });
