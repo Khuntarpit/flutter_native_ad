@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_native_ad/flutter_banner_ad.dart';
 import 'package:flutter_native_ad/flutter_native_ad_config.dart';
@@ -36,9 +37,37 @@ class MockBannerAd extends BannerAd {
 void main() {
   group('FlutterBannerAd Tests', () {
     setUp(() {
+      // Initialize Flutter binding
+      TestWidgetsFlutterBinding.ensureInitialized();
+      
+      // Mock the Google Mobile Ads SDK
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/google_mobile_ads'),
+        (MethodCall methodCall) async {
+          switch (methodCall.method) {
+            case 'MobileAds#initialize':
+              return {'adapterStatuses': {}};
+            case 'MobileAds#updateRequestConfiguration':
+              return null;
+            default:
+              return null;
+          }
+        },
+      );
+      
       // Initialize config for testing
       FlutterNativeAdConfig.initialize(isTestMode: true);
       FlutterNativeAdLogger.setEnabled(false); // Disable logging for tests
+    });
+
+    tearDown(() {
+      // Clean up method call handler
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/google_mobile_ads'),
+        null,
+      );
     });
 
     test('should create FlutterBannerAd instance', () {
@@ -48,28 +77,23 @@ void main() {
 
     test('should load banner ad with default ad unit ID', () {
       final bannerAd = FlutterBannerAd();
-      bool adLoaded = false;
-      bool adFailed = false;
-
-      bannerAd.loadBannerAd(
-        onAdLoaded: (ad) {
-          adLoaded = true;
-        },
-        onAdFailedToLoad: (ad, error) {
-          adFailed = true;
-        },
-      );
-
-      // Since we can't easily mock the actual BannerAd creation,
-      // we test that the method doesn't throw
-      expect(() => bannerAd.loadBannerAd(), returnsNormally);
+      
+      // Test that the method signature is correct and doesn't throw
+      expect(() => bannerAd.loadBannerAd(
+        onAdLoaded: (ad) {},
+        onAdFailedToLoad: (ad, error) {},
+      ), returnsNormally);
     });
 
     test('should load banner ad with custom ad unit ID', () {
       final bannerAd = FlutterBannerAd();
       const customAdUnitId = 'ca-app-pub-1234567890123456/1234567890';
 
-      expect(() => bannerAd.loadBannerAd(adUnitId: customAdUnitId), returnsNormally);
+      expect(() => bannerAd.loadBannerAd(
+        adUnitId: customAdUnitId,
+        onAdLoaded: (ad) {},
+        onAdFailedToLoad: (ad, error) {},
+      ), returnsNormally);
     });
 
     test('should return AdWidget when banner ad is loaded', () {

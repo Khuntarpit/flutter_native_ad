@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_ad/flutter_native_ad_platform_interface.dart';
 import 'package:flutter_native_ad/flutter_native_ad_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -46,6 +47,33 @@ void main() {
 
   group('Method Channel Tests', () {
     TestWidgetsFlutterBinding.ensureInitialized();
+
+    setUp(() {
+      // Mock the method channel
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('flutter_native_ad'),
+        (MethodCall methodCall) async {
+          switch (methodCall.method) {
+            case 'getPlatformVersion':
+              return '42';
+            case 'getNativeAds':
+              return 'mock-native-ad';
+            default:
+              return null;
+          }
+        },
+      );
+    });
+
+    tearDown(() {
+      // Clean up method call handler
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('flutter_native_ad'),
+        null,
+      );
+    });
 
     test('MethodChannelFlutterNativeAd can be instantiated', () {
       final platform = MethodChannelFlutterNativeAd();

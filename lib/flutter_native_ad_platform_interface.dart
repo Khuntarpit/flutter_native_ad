@@ -28,6 +28,6 @@ abstract class FlutterNativeAdPlatform extends PlatformInterface {
   }
 
   Future<String?> getNativeAd() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('getNativeAd() has not been implemented.');
   }
 }

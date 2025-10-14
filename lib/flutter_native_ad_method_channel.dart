@@ -16,6 +16,12 @@ class MethodChannelFlutterNativeAd extends FlutterNativeAdPlatform {
     return version;
   }
 
+  @override
+  Future<String?> getNativeAd() async {
+    final result = await methodChannel.invokeMethod<String>('getNativeAds');
+    return result;
+  }
+
   Future getNativeAds() async {
     await methodChannel.invokeMethod<String>('getNativeAds');
   }
