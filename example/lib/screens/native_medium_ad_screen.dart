@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
 class NativeMediumAdScreen extends StatefulWidget {
-  const NativeMediumAdScreen({Key? key}) : super(key: key);
+  const NativeMediumAdScreen({super.key});
 
   @override
   State<NativeMediumAdScreen> createState() => _NativeMediumAdScreenState();
@@ -17,8 +17,8 @@ class _NativeMediumAdScreenState extends State<NativeMediumAdScreen> {
     loadAd();
   }
 
-  loadAd() async {
-    await _ad.loadmediumNativeAd(
+  Future<void> loadAd() async {
+    _ad.loadmediumNativeAd(
       onAdLoaded: (ad) {
         isMediumNativeAdReady = true;
         setState(() => "");
@@ -39,7 +39,7 @@ class _NativeMediumAdScreenState extends State<NativeMediumAdScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(
+            SizedBox(
                 height: 255,
                 child: isMediumNativeAdReady
                     ? _ad.getMediumNativeAD()

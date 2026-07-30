@@ -7,7 +7,7 @@ class FlutterInterstitialAd {
   InterstitialAd? interstitialAd;
   RewardedInterstitialAd? rewardedInterstitial;
 
-  loadInterstitialAd({
+  void loadInterstitialAd({
     String? adUnitId,
     required GenericAdEventCallback<InterstitialAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
@@ -55,7 +55,7 @@ class FlutterInterstitialAd {
     );
   }
 
-  loadRewardedInterstitialAd({
+  void loadRewardedInterstitialAd({
     String? adUnitId,
     required GenericAdEventCallback<RewardedInterstitialAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
@@ -102,7 +102,7 @@ class FlutterInterstitialAd {
         ));
   }
 
-  rewardedInterstitialCallback(
+  void rewardedInterstitialCallback(
       {GenericAdEventCallback<Ad>? onAdDismissedFullScreenContent,
       Function(Ad ad, AdError error)? onAdFailedToShowFullScreenContent}) {
     rewardedInterstitial?.fullScreenContentCallback = FullScreenContentCallback(

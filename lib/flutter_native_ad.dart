@@ -18,7 +18,7 @@ class FlutterNativeAd {
   late NativeAd nativeAd;
   late NativeAd mediumNativeAd;
 
-  static init({testDeviceIds}) async {
+  static Future<void> init({List<String>? testDeviceIds}) async {
     FlutterNativeAdLogger.init('Initializing MobileAds SDK...');
     
     // Initialize MobileAds SDK if not already initialized
@@ -53,12 +53,12 @@ class FlutterNativeAd {
     }
   }
 
-  testDevice({testDeviceIds}) async {
+  Future<void> testDevice({List<String>? testDeviceIds}) async {
     MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
         testDeviceIds: testDeviceIds ?? ["BC754A812958EE7FF20599662417762B"]));
   }
 
-  invokeNativeAd({String? nativeVideoID}) async {
+  Future<void> invokeNativeAd({String? nativeVideoID}) async {
     const methodChannel = MethodChannel("flutter_native_ad");
 
     Map<String, String> nativeID = {
@@ -67,7 +67,7 @@ class FlutterNativeAd {
     await methodChannel.invokeMethod("getNativeAds", nativeID);
   }
 
-  loadNativeBannerAd(
+  void loadNativeBannerAd(
       {String? adUnitId,
       AdEventCallback? onAdLoaded,
       Function(Ad ad, LoadAdError error)? onAdFailedToLoad}) {
@@ -126,7 +126,7 @@ class FlutterNativeAd {
     nativeAd.load();
   }
 
-  loadmediumNativeAd(
+  void loadmediumNativeAd(
       {String? adUnitId,
       AdEventCallback? onAdLoaded,
       Function(Ad ad, LoadAdError error)? onAdFailedToLoad}) {

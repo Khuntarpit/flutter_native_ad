@@ -6,7 +6,7 @@ import 'flutter_native_ad_logger.dart';
 class FlutterAdOpenAd {
   AppOpenAd? appOpenAd;
 
-  loadAppOpenAd({
+  void loadAppOpenAd({
     String? adUnitId,
     required GenericAdEventCallback<AppOpenAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
@@ -54,7 +54,7 @@ class FlutterAdOpenAd {
     );
   }
 
-  appOpenAdCallback(
+  void appOpenAdCallback(
       {Function(Ad ad, AdError error)? onAdFailedToShowFullScreenContent,
       GenericAdEventCallback<Ad>? onAdDismissedFullScreenContent}) {
     appOpenAd?.fullScreenContentCallback = FullScreenContentCallback(

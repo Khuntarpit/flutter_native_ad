@@ -6,7 +6,7 @@ import 'flutter_native_ad_logger.dart';
 class FlutterRewardedAd {
   late RewardedAd rewardedAd;
 
-  loadRewardedAd({
+  void loadRewardedAd({
     String? adUnitId,
     required GenericAdEventCallback<RewardedAd> onAdLoaded,
     required FullScreenAdLoadErrorCallback onAdFailedToLoad,
@@ -54,7 +54,7 @@ class FlutterRewardedAd {
     );
   }
 
-  rewardedCallback(
+  void rewardedCallback(
       {GenericAdEventCallback<Ad>? onAdDismissedFullScreenContent,
       Function(Ad ad, AdError error)? onAdFailedToShowFullScreenContent}) {
     rewardedAd.fullScreenContentCallback = FullScreenContentCallback(

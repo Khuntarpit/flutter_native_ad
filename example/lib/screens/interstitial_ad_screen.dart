@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_interstitial_ad.dart';
 
 class InterstitialAdScreen extends StatefulWidget {
-  const InterstitialAdScreen({Key? key}) : super(key: key);
+  const InterstitialAdScreen({super.key});
 
   @override
   State<InterstitialAdScreen> createState() => _InterstitialAdScreenState();
@@ -18,13 +18,13 @@ class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
     loadAds();
   }
 
-  loadAds() async {
-    await _loadInterstitialAd();
-    await _loadRewardedInterstitialAd();
+  Future<void> loadAds() async {
+    _loadInterstitialAd();
+    _loadRewardedInterstitialAd();
   }
 
-  _loadInterstitialAd() async {
-    await _interstitialAd.loadInterstitialAd(
+  void _loadInterstitialAd() {
+    _interstitialAd.loadInterstitialAd(
       onAdLoaded: (ad) {
         _interstitialAd.interstitialAd = ad;
         isInterstitialAdReady = true;
@@ -37,8 +37,8 @@ class _InterstitialAdScreenState extends State<InterstitialAdScreen> {
     );
   }
 
-  _loadRewardedInterstitialAd() async {
-    await _interstitialAd.loadRewardedInterstitialAd(
+  void _loadRewardedInterstitialAd() {
+    _interstitialAd.loadRewardedInterstitialAd(
       onAdLoaded: (ad) {
         _interstitialAd.rewardedInterstitial = ad;
         isRewardedInterstitialAdReady = true;

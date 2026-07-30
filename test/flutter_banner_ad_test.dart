@@ -8,16 +8,11 @@ import 'package:flutter_native_ad/flutter_native_ad_logger.dart';
 // Mock the Google Mobile Ads SDK
 class MockBannerAd extends BannerAd {
   MockBannerAd({
-    required String adUnitId,
-    required AdSize size,
-    required AdRequest request,
-    required BannerAdListener listener,
-  }) : super(
-          adUnitId: adUnitId,
-          size: size,
-          request: request,
-          listener: listener,
-        );
+    required super.adUnitId,
+    required super.size,
+    required super.request,
+    required super.listener,
+  });
 
   @override
   Future<void> load() async {

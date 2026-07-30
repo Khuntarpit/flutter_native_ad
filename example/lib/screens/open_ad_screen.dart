@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
 class AdOpenAdScreen extends StatefulWidget {
-  const AdOpenAdScreen({Key? key}) : super(key: key);
+  const AdOpenAdScreen({super.key});
 
   @override
   State<AdOpenAdScreen> createState() => _AdOpenAdScreenState();
@@ -18,8 +18,8 @@ class _AdOpenAdScreenState extends State<AdOpenAdScreen> {
     loadAd();
   }
 
-  loadAd() async {
-    await _adOpenAd.loadAppOpenAd(
+  Future<void> loadAd() async {
+    _adOpenAd.loadAppOpenAd(
       onAdLoaded: (ad) {
         print('$ad loaded');
         _adOpenAd.appOpenAd = ad;

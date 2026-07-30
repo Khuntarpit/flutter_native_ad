@@ -13,9 +13,9 @@ import com.google.android.gms.ads.nativead.NativeAdView;
 
 import java.util.Map;
 
-import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin;
+import io.flutter.plugins.googlemobileads.NativeAdFactory;
 
-class NativeAdFactorySmall implements GoogleMobileAdsPlugin.NativeAdFactory {
+class NativeAdFactorySmall implements NativeAdFactory {
 
     private final Context context;
 

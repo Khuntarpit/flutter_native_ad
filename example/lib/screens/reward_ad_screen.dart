@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_rewarded_ad.dart';
 
 class RewardedAdScreen extends StatefulWidget {
-  const RewardedAdScreen({Key? key}) : super(key: key);
+  const RewardedAdScreen({super.key});
 
   @override
   State<RewardedAdScreen> createState() => _RewardedAdScreenState();
@@ -17,8 +17,8 @@ class _RewardedAdScreenState extends State<RewardedAdScreen> {
     loadAds();
   }
 
-  loadAds() async {
-    await _rewardedAd.loadRewardedAd(
+  Future<void> loadAds() async {
+    _rewardedAd.loadRewardedAd(
       onAdLoaded: (ad) {
         _rewardedAd.rewardedAd = ad;
         isRewardedAdReady = true;

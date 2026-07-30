@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
 class BannerAdScreen extends StatefulWidget {
-  const BannerAdScreen({Key? key}) : super(key: key);
+  const BannerAdScreen({super.key});
 
   @override
   State<BannerAdScreen> createState() => _BannerAdScreenState();
@@ -17,9 +17,9 @@ class _BannerAdScreenState extends State<BannerAdScreen> {
     loadAd();
   }
 
-  loadAd() async {
+  Future<void> loadAd() async {
     print('🎯 [BANNER SCREEN] Attempting to load banner ad...');
-    await _adBanner.loadBannerAd(
+    _adBanner.loadBannerAd(
       // adUnitId: "Your Banner Ad ID", // Optional: override with custom ID
       onAdLoaded: (_) {
         isBannerAdReady = true;
@@ -43,7 +43,7 @@ class _BannerAdScreenState extends State<BannerAdScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(
+            SizedBox(
                 height: 50,
                 child: isBannerAdReady
                     ? _adBanner.getBannerAd()

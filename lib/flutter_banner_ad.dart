@@ -9,7 +9,7 @@ class FlutterBannerAd {
 
   late BannerAd bannerAd;
 
-  loadBannerAd({
+  void loadBannerAd({
     String? adUnitId,
     AdEventCallback? onAdLoaded,
     AdLoadErrorCallback? onAdFailedToLoad,
