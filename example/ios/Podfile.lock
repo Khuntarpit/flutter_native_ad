@@ -1,0 +1,49 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_native_ad (0.0.1):
+    - Flutter
+    - Google-Mobile-Ads-SDK (~> 13.3.0)
+    - google_mobile_ads
+  - Google-Mobile-Ads-SDK (13.3.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - google_mobile_ads (9.0.0):
+    - Flutter
+    - Google-Mobile-Ads-SDK (~> 13.3.0)
+    - webview_flutter_wkwebview
+  - GoogleUserMessagingPlatform (3.1.0)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_native_ad (from `.symlinks/plugins/flutter_native_ad/ios`)
+  - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - Google-Mobile-Ads-SDK
+    - GoogleUserMessagingPlatform
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_native_ad:
+    :path: ".symlinks/plugins/flutter_native_ad/ios"
+  google_mobile_ads:
+    :path: ".symlinks/plugins/google_mobile_ads/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_native_ad: 2d614aad70ba33be43f10913065b8f3730312623
+  Google-Mobile-Ads-SDK: 7692126a35ed859f20635af281c50a2162be8bea
+  google_mobile_ads: e0c300fcd472c3fa5a00d6cca8b0c65bbbb15faf
+  GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
+  webview_flutter_wkwebview: 29eb20d43355b48fe7d07113835b9128f84e3af4
+
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
+
+COCOAPODS: 1.16.2
